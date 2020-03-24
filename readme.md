@@ -44,13 +44,13 @@
 
 ### API Endpoint for Teacher
 
-| URL                                                       | Method | Description                                |
-| --------------------------------------------------------- | ------ | ------------------------------------------ |
-| /api/course                                               | POST   | Create a course                            |
-| /api/course/<course_id>                                   | GET    | Get detail course                          |
-| /api/course/me                                            | GET    | Get all current teacher courses            |
-| /api/course/<course_id>/add/attendance                    | POST   | Create course attendance                   |
-| /api/course/<course_id>/add/attendance                    | GET    | Get all courses attendance                 |
-| /api/course/<course_id>/add/attendance/<attendance_id>    | GET    | Get detail course attendance               |
-| /api/course/<course_id>/fc/attendance/<attendance_id>     | POST   | Upload a photo to recognize students faces |
-| /api/course/<course_id>/update/attendance/<attendance_id> | PUT    | Update attendance                          |
+| URL                                                           | Method | Description                                |
+| ------------------------------------------------------------- | ------ | ------------------------------------------ |
+| /api/teacher/course                                           | POST   | Create a course                            |
+| /api/teacher/course                                           | GET    | Get all current teacher courses            |
+| /api/teacher/course/<course_id>                               | GET    | Get detail course                          |
+| /api/teacher/course/<course_id>/attendance                    | POST   | Create course attendance                   |
+| /api/teacher/course/<course_id>/attendance                    | GET    | Get all courses attendance                 |
+| /api/teacher/course/<course_id>/attendance/<attendance_id>    | GET    | Get detail course attendance               |
+| /api/teacher/course/<course_id>/attendance/<attendance_id>/fc | POST   | Upload a photo to recognize students faces |
+| /api/teacher/course/<course_id>/attendance/<attendance_id>    | PUT    | Update attendance                          |
