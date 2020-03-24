@@ -9,6 +9,10 @@ def create_app() -> Flask:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../afc_dev.db'
     app.url_map.strict_slashes = False
 
+    from afc_core.user.controller import user
+
+    app.register_blueprint(user, url_prefix='/api/user')
+
     return app
 
 
