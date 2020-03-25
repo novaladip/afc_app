@@ -28,15 +28,8 @@ def sign_in():
     return jsonify(bearer_token=bearer_token)
 
 
-@user.route('/secret', methods=['GET'])
-@jwt_required
-def secret():
-    user = get_jwt_identity()
-    return jsonify(user)
-
-
 @user.route('/register/student', methods=['POST'])
-def register_student():
+def sign_up_student():
     dto = request.form
     avatar = request.files['avatar']
     existing_user = get_user_by_email(dto['email'])

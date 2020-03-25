@@ -5,6 +5,11 @@ from afc_core.models.user import User
 from afc_core.user.utils import hash_password
 
 
+def get_user_by_id(id: str) -> User:
+    user = User.query.filter_by(id=id).first()
+    return user
+
+
 def get_user_by_email(email: str) -> User:
     user = User.query.filter_by(email=email).first()
     return user
