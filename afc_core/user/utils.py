@@ -12,10 +12,7 @@ def hash_password(password: str) -> str:
 
 
 def compare_password(hashed_password: str, password: str) -> bool:
-    print(f'hash: ${hashed_password}')
-    print(f'nom: ${password}')
-    return True
-    # return bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8'))
+    return bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 
 def store_avatar(file) -> str:
