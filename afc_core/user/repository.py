@@ -20,18 +20,25 @@ def get_users():
     return users
 
 
+def create_user(user: User) -> User:
+    db.session.add(user)
+    db.session.commit()
+
+
 def register_student(form, avatar: str):
     new_user = User(email=form['email'], password=form['password'],
                     first_name=form['first_name'], last_name=form['last_name'], avatar=avatar, role="STUDENT")
 
     new_user.password = hash_password(new_user.password)
-    db.session.add(new_user)
-    db.session.commit()
+    create_user(new_user)
     return new_user
 
+def register_teacher(form, avatar: str) -> User:
+    new_user = User(email=form['email'], password=form['password'], first_name = form['first_name'], last_name=form['last_name'], avatar=avatar, role="TEACHER")
+    new_user.password = hash_password(new_user.password)
+    create_user(new_user)
+    return new_user
 
-def register_teacher():
-    pass
 
 
 def reset_password():

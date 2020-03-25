@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from afc_core import APP_ROOT
 from afc_core.models.user import User
 
-from .repository import get_user_by_email, register_student
+from .repository import get_user_by_email, register_student, register_teacher
 from .schema import user_schema
 from .utils import store_avatar, compare_password, hash_password, create_bearer_token
 
@@ -42,8 +42,17 @@ def sign_up_student():
 
 
 @user.route('/register/teacher', methods=['POST'])
-def register_teacher():
-    return jsonify({'message': 'registering a teacher'})
+def sign_up_teacher():
+    dto = request.form
+    avatar = request.files['avatar']
+    existing_user = get_user_by_email(dto['email'])
+    if existing_user:
+        return jsonify({'message': 'Email is already taken'}), 400
+
+    avatar_name = store_avatar(avatar)
+    teacher = register_teacher(dto, avatar_name)
+
+    return user_schema.jsonify(teacher), 201
 
 
 @user.route('/reset/password', methods=['POST'])
