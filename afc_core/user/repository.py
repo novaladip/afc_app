@@ -42,6 +42,13 @@ def register_teacher(form, avatar: str) -> User:
     return new_user
 
 
+def update_user_profile(id: str, avatar: str) -> User:
+    user = get_user_by_id(id)
+    user.avatar = avatar
+    db.session.commit()
+    return user
+
+
 def reset_password():
     pass
 

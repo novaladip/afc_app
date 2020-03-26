@@ -6,7 +6,7 @@ from afc_core import APP_ROOT
 from afc_core.models.user import User
 from afc_core.middleware.auth import auth_required
 
-from .repository import get_user_by_email, get_user_by_id, register_student, register_teacher
+from .repository import get_user_by_email, get_user_by_id, register_student, register_teacher, update_user_profile
 from .schema import user_schema
 from .utils import store_avatar, compare_password, hash_password, create_bearer_token
 
@@ -70,5 +70,10 @@ def get_profile():
 
 
 @user.route('/profile', methods=['PUT'])
+@auth_required
 def update_profile():
-    return jsonify({'message': 'updating current user profile'})
+    avatar = request.files['avatar']
+    avatar_name = store_avatar(avatar)
+    user_id = get_jwt_identity()['id']
+    updated_user = update_user_profile(user_id, avatar_name)
+    return user_schema.jsonify(updated_user)
