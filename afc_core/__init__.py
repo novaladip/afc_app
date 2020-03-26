@@ -25,6 +25,10 @@ def create_app() -> Flask:
     from afc_core.user.controller import user
     app.register_blueprint(user, url_prefix='/api/user')
 
+    # Course API
+    from afc_core.course.controller import course
+    app.register_blueprint(course, url_prefix='/api/course')
+
     return app
 
 

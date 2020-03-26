@@ -12,6 +12,7 @@ from flask_migrate import Migrate, MigrateCommand
 from afc_core import app
 from afc_core.models import db
 from afc_core.models.user import User
+from afc_core.models.course import Course
 
 db.init_app(app)
 migrate = Migrate(app, db)

@@ -4,6 +4,8 @@ from afc_core.models import db, generate_uuid
 
 
 class User(db.Model):
+    __tablename__ = 'user'
+
     id: str = db.Column(db.String(), primary_key=True, default=generate_uuid)
     email: str = db.Column(db.String(100), unique=True, nullable=False)
     password: str = db.Column(db.String(100), nullable=False)
