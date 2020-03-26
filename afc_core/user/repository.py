@@ -33,12 +33,13 @@ def register_student(form, avatar: str):
     create_user(new_user)
     return new_user
 
+
 def register_teacher(form, avatar: str) -> User:
-    new_user = User(email=form['email'], password=form['password'], first_name = form['first_name'], last_name=form['last_name'], avatar=avatar, role="TEACHER")
+    new_user = User(email=form['email'], password=form['password'], first_name=form['first_name'],
+                    last_name=form['last_name'], avatar=avatar, role="TEACHER")
     new_user.password = hash_password(new_user.password)
     create_user(new_user)
     return new_user
-
 
 
 def reset_password():
