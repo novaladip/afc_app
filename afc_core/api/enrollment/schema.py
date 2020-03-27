@@ -1,6 +1,6 @@
 from afc_core.manage import ma
-from afc_core.course.schema import CourseSchema
-from afc_core.user.schema import UserSchema
+from afc_core.api.course.schema import CourseSchema
+from afc_core.api.user.schema import UserSchema
 
 
 class EnrollmentSchema(ma.Schema):

@@ -2,7 +2,7 @@ from functools import wraps
 from flask import jsonify
 from flask_jwt_extended import get_current_user, verify_jwt_in_request, get_jwt_identity
 
-from afc_core.user.repository import get_user_by_id
+from afc_core.api.user.repository import get_user_by_id
 
 
 def auth_required(fn):

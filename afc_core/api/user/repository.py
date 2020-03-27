@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from afc_core.models import db
 from afc_core.models.user import User
-from afc_core.user.utils import hash_password
+from .utils import hash_password
 
 
 def get_user_by_id(id: str) -> User:
@@ -47,15 +47,3 @@ def update_user_profile(id: str, avatar: str) -> User:
     user.avatar = avatar
     db.session.commit()
     return user
-
-
-def reset_password():
-    pass
-
-
-def get_user(id: str) -> User:
-    pass
-
-
-def update_profile():
-    pass

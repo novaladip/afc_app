@@ -1,5 +1,5 @@
 from afc_core.manage import ma
-from afc_core.user.schema import UserProfileSchema
+from afc_core.api.user.schema import UserProfileSchema
 
 
 class CourseSchema(ma.Schema):

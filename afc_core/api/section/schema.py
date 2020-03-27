@@ -1,5 +1,5 @@
 from afc_core.manage import ma
-from afc_core.course.schema import CourseSchema
+from afc_core.api.course.schema import CourseSchema
 
 
 class SectionSchema(ma.Schema):

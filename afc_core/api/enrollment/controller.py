@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import get_jwt_identity
 
-from .repository import create_enrollment, get_all_enrollment
-from .schema import enrollment_schema, enrollments_schema
+
 from afc_core.middleware.auth import student_only
+from .schema import enrollment_schema, enrollments_schema
+from .repository import create_enrollment, get_all_enrollment
 
 enrollment = Blueprint('Enrollment', __name__)
 

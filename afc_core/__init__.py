@@ -22,19 +22,19 @@ def create_app() -> Flask:
     jwt.init_app(app)
 
     # User API
-    from afc_core.user.controller import user
+    from afc_core.api.user.controller import user
     app.register_blueprint(user, url_prefix='/api/user')
 
     # Course API
-    from afc_core.course.controller import course
+    from afc_core.api.course.controller import course
     app.register_blueprint(course, url_prefix='/api/course')
 
     # Enrollment API
-    from afc_core.enrollment.controller import enrollment
+    from afc_core.api.enrollment.controller import enrollment
     app.register_blueprint(enrollment, url_prefix='/api/enrollment')
 
     # Section API
-    from afc_core.section.controller import section
+    from afc_core.api.section.controller import section
     app.register_blueprint(section, url_prefix='/api/section')
 
     return app
