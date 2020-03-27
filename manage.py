@@ -13,6 +13,7 @@ from afc_core import app
 from afc_core.models import db
 from afc_core.models.user import User
 from afc_core.models.course import Course
+from afc_core.models.enrollment import Enrollment
 
 db.init_app(app)
 migrate = Migrate(app, db)

@@ -29,6 +29,10 @@ def create_app() -> Flask:
     from afc_core.course.controller import course
     app.register_blueprint(course, url_prefix='/api/course')
 
+    # Enrollment API
+    from afc_core.enrollment.controller import enrollment
+    app.register_blueprint(enrollment, url_prefix='/api/enrollment')
+
     return app
 
 
