@@ -1,11 +1,21 @@
 from flask_sqlalchemy import SQLAlchemy
+import datetime as dt
+from typing import List
 
 from afc_core.models import db
+from afc_core.models.user import User
 from afc_core.models.course import Course
 
 
-def get_courses():
-    courses = Course.query.all()
+def get_available_courses() -> List[Course]:
+    now = dt.datetime.utcnow()
+    courses = Course.query.filter(Course.close_date > now).all()
+    return courses
+
+
+def get_teacher_courses(teacher_id: str) -> List[Course]:
+    courses = Course.query.order_by(Course.created_at.desc()).filter(
+        Course.teacher_id == teacher_id).all()
     return courses
 
 
