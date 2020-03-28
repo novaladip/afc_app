@@ -9,7 +9,7 @@ class Enrollment(db.Model):
     student_id: str = db.Column(db.String(), db.ForeignKey('user.id'))
     course_id: str = db.Column(db.String(), db.ForeignKey('course.id'))
     student = db.relationship('User')
-    course = db.relationship('Course')
+    course = db.relationship('Course', backref='students')
 
     def __init__(self, student_id: str, course_id: str):
         self.student_id = student_id

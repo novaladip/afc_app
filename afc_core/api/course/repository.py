@@ -25,3 +25,8 @@ def create_course(teacher_id, form) -> Course:
     db.session.add(course)
     db.session.commit()
     return course
+
+
+def get_course_by_id(course_id: str) -> Course:
+    course = Course.query.filter(Course.id == course_id).first()
+    return course

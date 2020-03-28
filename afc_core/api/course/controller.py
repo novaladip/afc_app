@@ -3,8 +3,8 @@ from flask_jwt_extended import get_jwt_identity
 
 from afc_core.middleware.auth import teacher_only, auth_required
 
-from .schema import course_schema, courses_schema
-from .repository import create_course, get_available_courses, get_teacher_courses
+from .schema import course_schema, courses_schema, course_student_schema
+from .repository import create_course, get_available_courses, get_teacher_courses, get_course_by_id
 
 course = Blueprint('course', __name__)
 
@@ -21,6 +21,13 @@ def get():
 
     result = courses_schema.dump(courses)
     return jsonify(result)
+
+
+@course.route('/<course_id>', methods=['GET'])
+@teacher_only
+def get_by_id(course_id: str):
+    course = get_course_by_id(course_id)
+    return course_student_schema.jsonify(course)
 
 
 @course.route('/', methods=['POST'])
