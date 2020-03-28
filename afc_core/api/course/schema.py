@@ -11,7 +11,7 @@ class EnrollmentStudentSchema(ma.Schema):
 
 class SectionSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'count', 'date', 'photo')
+        fields = ('id', 'count', 'date', )
 
 
 class CourseSchema(ma.Schema):

@@ -14,6 +14,7 @@ from afc_core.models import db
 from afc_core.models.user import User
 from afc_core.models.course import Course
 from afc_core.models.section import Section
+from afc_core.models.attendance import Attendance
 from afc_core.models.enrollment import Enrollment
 
 

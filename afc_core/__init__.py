@@ -37,6 +37,10 @@ def create_app() -> Flask:
     from afc_core.api.section.controller import section
     app.register_blueprint(section, url_prefix='/api/section')
 
+    # Attendance API
+    from afc_core.api.attendance.controller import attendance
+    app.register_blueprint(attendance, url_prefix='/api/attendance')
+
     return app
 
 
