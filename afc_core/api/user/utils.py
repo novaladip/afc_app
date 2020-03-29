@@ -2,6 +2,7 @@ import bcrypt
 import os
 import calendar
 import time
+from datetime import timedelta
 from flask import current_app
 from flask_jwt_extended import create_access_token
 from werkzeug.utils import secure_filename
@@ -23,4 +24,5 @@ def store_avatar(file) -> str:
 
 
 def create_bearer_token(user):
-    return create_access_token(identity={'id': user.id, 'email': user.email, 'role': user.role})
+    expires = timedelta(days=30)
+    return create_access_token(identity={'id': user.id, 'email': user.email, 'role': user.role}, expires_delta=expires)
