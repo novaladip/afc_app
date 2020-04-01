@@ -8,7 +8,11 @@ class UserSchema(ma.Schema):
 
 class UserProfileSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'email', 'first_name', 'last_name', 'avatar')
+        fields = ('id', 'email', 'first_name', 'last_name', 'avatar', 'links')
+
+    links = ma.Hyperlinks({
+        "avatar": ma.URLFor("user.show_avatar", name="<avatar>")
+    })
 
 
 # Init schema
