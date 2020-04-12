@@ -13,10 +13,13 @@ class AttendancesSchema(ma.Schema):
 class SectionSchema(ma.Schema):
     class Meta:
         fields = ('id', 'count', 'date', 'course_id',
-                  'photo', 'course', 'attendances')
+                  'photo', 'course', 'attendances', 'links')
 
     course = ma.Nested(CourseSchema)
     attendances = ma.Nested(AttendancesSchema, many=True)
+    links = ma.Hyperlinks({
+        "class_photo": ma.URLFor("section.photo", name="<photo>")
+    })
 
 
 # Init schema

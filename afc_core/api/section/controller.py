@@ -1,7 +1,9 @@
-from flask import Blueprint, jsonify, request
+import os
+from flask import Blueprint, jsonify, request, current_app, send_from_directory
 
+from .utils import store_class_photo
 from .schema import section_schema,  sections_schema
-from .repository import get_section_by_course_id, get_section_by_id, create_section
+from .repository import get_section_by_course_id, get_section_by_id, create_section, save_class_photo
 
 from afc_core.middleware.auth import auth_required, teacher_only
 
@@ -30,3 +32,18 @@ def add_section():
 def get_detail_section(section_id: str):
     section = get_section_by_id(section_id)
     return section_schema.jsonify(section)
+
+
+@section.route('/<section_id>/recognize/student', methods=['POST'])
+@teacher_only
+def recognize_student(section_id):
+    class_photo = request.files['photo']
+    file_name = store_class_photo(class_photo)
+    new_section = save_class_photo(section_id, file_name)
+    return section_schema.jsonify(new_section)
+
+
+@section.route('/photo/<name>', methods=['GET'])
+def photo(name):
+    upload_dir = os.path.join(current_app.config['UPLOAD_FOLDER'])
+    return send_from_directory(upload_dir, name)

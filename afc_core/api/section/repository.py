@@ -31,3 +31,10 @@ def get_section_by_course_id(course_id: str) -> List[Section]:
     sections = Section.query.filter(
         Section.course_id == course_id).order_by(Section.count.asc()).all()
     return sections
+
+
+def save_class_photo(course_id, photo):
+    section = get_section_by_id(course_id)
+    section.photo = photo
+    db.session.commit()
+    return section

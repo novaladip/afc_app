@@ -6,7 +6,7 @@ from .manage import ma, jwt
 from afc_core.models import db
 
 APP_ROOT = os.path.join(os.path.dirname(__file__))
-UPLOAD_FOLDER = Path(__file__).parent.parent.__str__() + '/upload/avatar'
+UPLOAD_FOLDER = Path(__file__).parent.parent.__str__() + '/upload'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 
