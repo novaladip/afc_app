@@ -22,6 +22,12 @@ class SectionSchema(ma.Schema):
     })
 
 
+class StudentSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'is_matches', 'name')
+
+
 # Init schema
 section_schema = SectionSchema()
 sections_schema = SectionSchema(many=True)
+students_schema = StudentSchema(many=True)
