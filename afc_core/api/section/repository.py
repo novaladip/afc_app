@@ -33,8 +33,9 @@ def get_section_by_course_id(course_id: str) -> List[Section]:
     return sections
 
 
-def save_class_photo(course_id, photo):
+def save_class_photo(course_id, photo, result_photo):
     section = get_section_by_id(course_id)
     section.photo = photo
+    section.photo_result = result_photo
     db.session.commit()
     return section

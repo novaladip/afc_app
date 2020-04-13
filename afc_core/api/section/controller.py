@@ -38,11 +38,11 @@ def get_detail_section(section_id: str):
 @teacher_only
 def recognize_student(section_id):
     class_photo = request.files['photo']
+    old_section = get_section_by_id(section_id)
     file_name = store_class_photo(class_photo)
-    new_section = save_class_photo(section_id, file_name)
     students = []
 
-    for attendance in new_section.attendances:
+    for attendance in old_section.attendances:
         students.append(Student(
             attendance.student.id,
             attendance.student.last_name,
@@ -52,14 +52,16 @@ def recognize_student(section_id):
             ),
         ))
 
-    [students, faces] = recognize_student_faces(students, os.path.join(
+    [students, faces, faces_mark] = recognize_student_faces(students, os.path.join(
         current_app.config['UPLOAD_FOLDER'],
         file_name
     ),)
 
+    new_section = save_class_photo(section_id, file_name, faces_mark)
+
     result = students_schema.dump(students)
 
-    return jsonify({'result': result, 'face_founds': faces})
+    return jsonify({'result': result, 'face_founds': faces, 'face_mark': f'/api/section/photo/{faces_mark}'})
 
 
 @section.route('/photo/<name>', methods=['GET'])

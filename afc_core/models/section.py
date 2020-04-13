@@ -9,6 +9,7 @@ class Section(db.Model):
     date = db.Column(db.DateTime, default=db.func.now())
     course_id = db.Column(db.String(), db.ForeignKey('course.id'))
     photo = db.Column(db.String(), default="")
+    photo_result = db.Column(db.String(), default="")
     course = db.relationship('Course', backref="sections")
 
     def __init__(self, count, course_id):

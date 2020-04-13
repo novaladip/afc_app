@@ -87,5 +87,9 @@ def recognize_student_faces(students: List[Student], class_photo):
                       name, fill=(255, 255, 255))
 
     del draw
-    pil_image.show()
-    return [students, len(face_locations)]
+    timestamp = calendar.timegm(time.gmtime())
+    file_name = f'section_result_{timestamp}.jpg'
+    upload_folder = os.path.join(
+        current_app.config['UPLOAD_FOLDER'], file_name)
+    pil_image.save(upload_folder)
+    return [students, len(face_locations), file_name]
