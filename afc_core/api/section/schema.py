@@ -25,7 +25,7 @@ class SectionSchema(ma.Schema):
 
 class StudentSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'is_matches', 'name')
+        fields = ('id', 'is_matches', 'name', 'attendance_id')
 
 
 # Init schema

@@ -12,10 +12,11 @@ from werkzeug.utils import secure_filename
 class Student:
     is_matches = False
 
-    def __init__(self, id, name, photo):
+    def __init__(self, id, name, photo, attendance_id):
         self.id = id
         self.name = name
         self.photo = photo
+        self.attendance_id = attendance_id
 
     def update_match(self, value: bool):
         self.is_matches = value

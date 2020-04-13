@@ -50,6 +50,7 @@ def recognize_student(section_id):
                 current_app.config['UPLOAD_FOLDER'],
                 attendance.student.avatar
             ),
+            attendance.id,
         ))
 
     [students, faces, faces_mark] = recognize_student_faces(students, os.path.join(
