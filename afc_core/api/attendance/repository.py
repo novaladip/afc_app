@@ -17,3 +17,11 @@ class AttendanceRepository:
         db.session.bulk_save_objects(attendances)
         db.session.commit()
         return attendances
+
+    @staticmethod
+    def bulk_update(data):
+        for a in data['attendances']:
+            Attendance.query.filter(Attendance.id == a['id']).update(
+                {Attendance.status: a['status']})
+
+        db.session.commit()
