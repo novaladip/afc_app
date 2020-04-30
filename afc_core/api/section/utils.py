@@ -28,13 +28,16 @@ def store_class_photo(file) -> str:
     filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
     file.save(filepath)
     filesize = os.stat(filepath).st_size / 1000
-
-    if (filesize > 200):
-        image = Image.open(filepath)
-        x, y = image
-        x2, y2 = math.floor(x/2), math.floor(y/2)
-        image = image.resize(x2, y2, Image.ANTIALIAS)
-        image.save(filepath)
+    img = Image.open(filepath)
+    x, y = img.size
+    basewidth = 1000
+    if (x > basewidth):
+        wpercent = (basewidth/float(x))
+        hsize = int((float(y)*float(wpercent)))
+        x2, y2 = basewidth, hsize
+        img = img.resize((x2, y2))
+        img.save(filepath)
+        return filename
 
     return filename
 
@@ -66,7 +69,7 @@ def recognize_student_faces(students: List[Student], class_photo):
         matches = fr.compare_faces(
             known_faces_encodings,
             face_encoding,
-            0.40,
+            0.50,
         )
 
         if True in matches:

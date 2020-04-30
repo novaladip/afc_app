@@ -23,13 +23,15 @@ def store_avatar(file) -> str:
     filename = f'{timestamp}_{secure_filename(file.filename)}'
     filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
     file.save(filepath)
-    filesize = os.stat(filepath).st_size / 1000
+    avatar = Image.open(filepath)
+    x, y = avatar.size
+    basewidth = 1000
+    if (x > basewidth):
 
-    if (filesize > 100):
-        avatar = Image.open(filepath)
-        x, y = avatar.size
-        x2, y2 = math.floor(x / 2), math.floor(y / 2)
-        avatar = avatar.resize((x2, y2), Image.ANTIALIAS)
+        wpercent = (basewidth/float(x))
+        hsize = int((float(y)*float(wpercent)))
+        x2, y2 = basewidth, hsize
+        avatar = avatar.resize((x2, y2))
         avatar.save(filepath)
         return filename
 
