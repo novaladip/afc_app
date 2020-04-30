@@ -13,7 +13,7 @@ class AttendancesSchema(ma.Schema):
 class SectionSchema(ma.Schema):
     class Meta:
         fields = ('id', 'count', 'date', 'course_id',
-                  'photo', 'photo_result' 'course', 'attendances', 'links')
+                  'photo', 'photo_result', 'course', 'attendances', 'links')
 
     course = ma.Nested(CourseSchema)
     attendances = ma.Nested(AttendancesSchema, many=True)
