@@ -25,8 +25,17 @@ class Student:
 def store_class_photo(file) -> str:
     timestamp = calendar.timegm(time.gmtime())
     filename = f'section_{timestamp}_{secure_filename(file.filename)}'
-    upload_folder = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+    filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
     file.save(upload_folder)
+    filesize = os.stat(filepath).st_size / 1000
+
+    if (filesize > 200):
+        image = Image.open(filepath)
+        x, y = image
+        x2, y2 = math.floor(x/2), math.floor(y/2)
+        image = image.resize(x2, y2, Image.ANTIALIAS)
+        image.save(filepath)
+
     return filename
 
 
@@ -57,7 +66,7 @@ def recognize_student_faces(students: List[Student], class_photo):
         matches = fr.compare_faces(
             known_faces_encodings,
             face_encoding,
-            0.45,
+            0.40,
         )
 
         if True in matches:

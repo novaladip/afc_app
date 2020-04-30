@@ -2,10 +2,12 @@ import bcrypt
 import os
 import calendar
 import time
+import math
 from datetime import timedelta
 from flask import current_app
 from flask_jwt_extended import create_access_token
 from werkzeug.utils import secure_filename
+from PIL import Image
 
 
 def hash_password(password: str) -> str:
@@ -19,7 +21,18 @@ def compare_password(hashed_password: str, password: str) -> bool:
 def store_avatar(file) -> str:
     timestamp = calendar.timegm(time.gmtime())
     filename = f'{timestamp}_{secure_filename(file.filename)}'
-    file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+    filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+    file.save(filepath)
+    filesize = os.stat(filepath).st_size / 1000
+
+    if (filesize > 100):
+        avatar = Image.open(filepath)
+        x, y = avatar.size
+        x2, y2 = math.floor(x / 2), math.floor(y / 2)
+        avatar = avatar.resize((x2, y2), Image.ANTIALIAS)
+        avatar.save(filepath)
+        return filename
+
     return filename
 
 
