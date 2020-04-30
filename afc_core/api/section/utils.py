@@ -26,7 +26,7 @@ def store_class_photo(file) -> str:
     timestamp = calendar.timegm(time.gmtime())
     filename = f'section_{timestamp}_{secure_filename(file.filename)}'
     filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-    file.save(upload_folder)
+    file.save(filepath)
     filesize = os.stat(filepath).st_size / 1000
 
     if (filesize > 200):
