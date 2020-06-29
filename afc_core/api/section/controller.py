@@ -1,6 +1,8 @@
 import os
+from datetime import datetime
 from flask import Blueprint, jsonify, request, current_app, send_from_directory
 
+from afc_core.api.course.repository import get_course_by_id
 from .utils import store_class_photo,  Student, recognize_student_faces
 from .schema import section_schema,  sections_schema, students_schema
 from .repository import get_section_by_course_id, get_section_by_id, create_section, save_class_photo
@@ -23,6 +25,15 @@ def get_section(course_id: str):
 @teacher_only
 def add_section():
     form = request.form
+    course_id = form['course_id']
+    course = get_course_by_id(course_id)
+    now = datetime.now()
+    if (course.close_date > now):
+        error = {
+            "message": "Can't create section before close date"
+        }
+        return jsonify(error), 400
+    
     section = create_section(form['course_id'], form['count'])
     return section_schema.jsonify(section)
 
