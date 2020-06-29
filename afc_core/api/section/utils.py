@@ -27,18 +27,6 @@ def store_class_photo(file) -> str:
     filename = f'section_{timestamp}_{secure_filename(file.filename)}'
     filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
     file.save(filepath)
-    filesize = os.stat(filepath).st_size / 1000
-    img = Image.open(filepath)
-    x, y = img.size
-    basewidth = 1000
-    if (x > basewidth):
-        wpercent = (basewidth/float(x))
-        hsize = int((float(y)*float(wpercent)))
-        x2, y2 = basewidth, hsize
-        img = img.resize((x2, y2))
-        img.save(filepath)
-        return filename
-
     return filename
 
 
