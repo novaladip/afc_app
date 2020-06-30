@@ -57,7 +57,7 @@ def recognize_student_faces(students: List[Student], class_photo):
         matches = fr.compare_faces(
             known_faces_encodings,
             face_encoding,
-            0.50,
+            0.45,
         )
 
         if True in matches:
