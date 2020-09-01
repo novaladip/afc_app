@@ -24,7 +24,7 @@ class Student:
 
 def store_class_photo(file) -> str:
     timestamp = calendar.timegm(time.gmtime())
-    filename = f'section_{timestamp}_{secure_filename(file.filename)}'
+    filename = f'section_{timestamp}.{secure_filename(file.filename)}'
     filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
     file.save(filepath)
     return filename
