@@ -115,3 +115,5 @@ dmypy.json
 *.jpeg
 *.png
 *.JPG
+/upload
+/postgres-data

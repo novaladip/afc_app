@@ -5,6 +5,7 @@ from flask import Flask
 from .manage import ma, jwt
 from afc_core.models import db
 
+DATABASE_URI = 'postgres://htaesiwctucjhp:b4dcc93f4a49dd85ed466deefec37a2d3cf8119d91c7495d20cf0fedf648e41f@ec2-50-19-222-129.compute-1.amazonaws.com:5432/d4ngpl1kcr1tod'
 APP_ROOT = os.path.join(os.path.dirname(__file__))
 UPLOAD_FOLDER = Path(__file__).parent.parent.__str__() + '/upload'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -12,9 +13,9 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 def create_app() -> Flask:
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../afc_dev.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://cotc:@localhost:5432/afc'
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-    app.config['JWT_SECRET_KEY'] = 'N0tL0v1ng1sh4rderth_an_u_know'
+    app.config['JWT_SECRET_KEY'] = 's0m3s3cr3t'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.url_map.strict_slashes = False
     db.init_app(app)
